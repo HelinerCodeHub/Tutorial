@@ -1,0 +1,21 @@
+name: Email Notification on Push
+on: [push]
+jobs:
+  sendEmail:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Send email
+      uses: dawidd6/action-send-mail@v2
+      with:
+        server_address: ${{ secrets.EMAIL_SERVER }}
+        server_port: ${{ secrets.EMAIL_PORT }}
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: Repository Update Notification
+        to: wzl15827762548@gmail.com  # 替换为员工邮件列表或个别地址
+        from: david@heliner.com 
+        body: The repository has been updated. Please pull the latest changes.
+
